@@ -25,4 +25,8 @@ def ver_sprint_app(clave_acceso):
         st.sidebar.write("Sprint Seleccionado: ", selected_sprint)
         st.sidebar.write("Fecha de entrega: ", sprints[grupo_id_sprint]['fecha_entrega'])
         hitos = sprints[grupo_id_sprint]['hitos']
-        st.sidebar.write("Cantidad de Hitos: ", len(hitos))
+        if(hitos == None):
+            st.sidebar.write("No hay hitos en este sprint.")
+        else:
+            st.sidebar.write("Cantidad de Hitos: ", len(hitos))
+        
