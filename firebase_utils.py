@@ -22,11 +22,12 @@ def crear_sprint_grupo(sprint,fecha_entrega,grupo_id):
         'fecha_entrega': fecha_entrega
     })
 
-def crear_hito_grupo(hito,grupo_id,sprint_id):
+def crear_hito_grupo(hito,descripcion,grupo_id,sprint_id):
     ref_hitos = db.reference(f'Grupos/{grupo_id}/sprints/{sprint_id}/hitos')
     ref_hitos.push({
         'hito': hito,
-        'cumplido': False
+        'cumplido': False,
+        'descripcion': descripcion
     })
 
 def obtener_hitos_sprint(grupo_id):
@@ -44,3 +45,12 @@ def eliminar_hito(grupo_id,sprint_id,hito_id):
 def eliminar_sprint_grupo(grupo_id,sprint_id):
     ref_sprint = db.reference(f'Grupos/{grupo_id}/sprints/{sprint_id}')
     ref_sprint.delete()
+
+def obtener_id_grupo(clave_acceso):
+    
+    ref_grupo = db.reference('Grupos')
+    grupos = ref_grupo.get()
+    for grupo in grupos:
+        if grupo == clave_acceso:
+            return grupo
+    return None

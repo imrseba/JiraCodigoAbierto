@@ -17,14 +17,14 @@ def eliminar_hito_app(clave_acceso):
         fecha_entrega_str = sprints[grupo_id_sprint]['fecha_entrega']
         fecha_entrega_sprint = datetime.fromisoformat(fecha_entrega_str)
 
-        fecha_limite = fecha_entrega_sprint - timedelta(days=5)
+        fecha_limite = fecha_entrega_sprint - timedelta(days=1)
         fecha_actual = datetime.now()
         
         # Calcular los días restantes
         dias_restantes = (fecha_limite - fecha_actual).days
 
         if dias_restantes < 0:
-            st.error("No se puede eliminar el hito. Debe ser al menos 5 días antes de la fecha de entrega del sprint.")
+            st.error("No se puede eliminar el hito. Debe ser al menos 1 día antes de la fecha de entrega del sprint.")
         else:
             st.info(f"Quedan {dias_restantes} días para eliminar hitos de este sprint.")
             hitos = obtener_hitos_grupo(clave_acceso, grupo_id_sprint)

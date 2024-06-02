@@ -19,21 +19,20 @@ def crear_hito_app(clave_acceso):
         fecha_entrega_sprint = datetime.fromisoformat(fecha_entrega_str)
         
         # Verificar si la fecha actual es al menos 5 días antes de la fecha de entrega del sprint
-        fecha_limite = fecha_entrega_sprint - timedelta(days=5)
+        fecha_limite = fecha_entrega_sprint - timedelta(days=1)
         fecha_actual = datetime.now()
-        
         # Calcular los días restantes
         dias_restantes = (fecha_limite - fecha_actual).days
         
         if dias_restantes < 0:
-            st.error("No se puede agregar el hito. Debe ser al menos 5 días antes de la fecha de entrega del sprint.")
+            st.error("No se puede agregar el hito. Debe ser al menos 1 dia antes de la fecha de entrega del sprint.")
         else:
             st.info(f"Quedan {dias_restantes} días para agregar hitos a este sprint.")
             nuevo_hito = st.text_input("Nuevo Hito:", key="hito_input")
-
+            descripcion = st.text_area("Descripción del Hito:", key="descripcion_input")
             if st.button("Agregar Hito", key="agregar_hito_button"):
                 if nuevo_hito:
-                    crear_hito_grupo(nuevo_hito, clave_acceso, grupo_id_sprint)
+                    crear_hito_grupo(nuevo_hito,descripcion,clave_acceso, grupo_id_sprint)
                     st.success("¡Hito agregado exitosamente!")
                 else:
                     st.error("Por favor, ingrese el nombre del hito.")
