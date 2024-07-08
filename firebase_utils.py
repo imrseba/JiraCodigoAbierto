@@ -54,3 +54,13 @@ def obtener_id_grupo(clave_acceso):
         if grupo == clave_acceso:
             return grupo
     return None
+
+def obtener_clave_acceso(correo, nombreGrupo):
+
+    ref = db.reference('Grupos')
+    grupos = ref.get()
+    for grupo in grupos:
+        if grupos[grupo]['correo'] == correo and grupos[grupo]['nombreGrupo'] == nombreGrupo:
+            return grupo
+    
+    return None

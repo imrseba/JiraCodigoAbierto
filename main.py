@@ -1,11 +1,12 @@
 import streamlit as st
-from firebase_utils import initialize_firebase, obtener_grupo, obtener_id_grupo
+from firebase_utils import initialize_firebase, obtener_grupo, obtener_id_grupo,obtener_clave_acceso
 from crear_Hito import crear_hito_app
 from crea_Sprint import crear_sprint_app
 from eliminar_Hito import eliminar_hito_app
 from eliminar_Sprint import eliminar_sprint_app
 from ver_Sprint import ver_sprint_app
 from mostrar_hitos import mostrar_hitos_app
+from obtener_Clave import obtener_clave
 # Inicializar Firebase al inicio de la aplicación
 initialize_firebase()
 
@@ -15,6 +16,9 @@ def main():
     #Ingresar clave de acceso
     clave_acceso = st.text_input("Ingrese la clave de acceso", type="default")
     resultado = obtener_id_grupo(clave_acceso)
+    #Olvidaste tu clave?
+    if(resultado == None):
+        obtener_clave()
     if(resultado != None):
         grupo = obtener_grupo(clave_acceso)
         st.success("Bienvenido grupo "+grupo["nombreGrupo"])
