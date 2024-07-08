@@ -2,7 +2,7 @@ import streamlit as st
 from firebase_utils import obtener_clave_acceso
 
 def obtener_clave():
-    st.sidebar.title("Obtener Clave Acceso")
+    st.sidebar.title("Obtener Clave de Acceso")
 
     correo = st.sidebar.text_input("Ingrese su correo", type="default")
     nombreGrupo = st.sidebar.text_input("Ingrese el nombre del grupo", type="default")
